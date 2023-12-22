@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 
 //check if password is passed as argument
 if(process.argv.length < 3) {
-    console.log('give a passwrod as argument')
-    process.exit(1)
+	console.log('give a passwrod as argument')
+	process.exit(1)
 }
 
 //check if password, name, number are passed as arguments
@@ -27,8 +27,8 @@ mongoose.connect(url) //connect to the db
 
 //create the schema for the person
 const personSchema = new mongoose.Schema({
-    name: string,
-    number: String
+	name: string,
+	number: String
 })
 
 //create the model of the person
@@ -36,21 +36,21 @@ const Person = mongoose.model('Person', personSchema)
 
 //create the new person object
 const person = new Person({
-    name,
-    number
+	name,
+	number
 })
 
 //save the person to the db
-process.argv.length > 3 
-    ?  person.save().then(result => {
-        //print a message to the console
-        console.log(`add ${name} number ${number} to phonebook`) 
-        mongoose.connection.close() // close the connection to the db
-       })
-    : Person.find({}).then((result) => {
-        console.log("Phonebook : ")
-        result.forEach( p => {
-            console.log(`${p.name} ${p.number}`)
-        })
-        mongoose.connection.close()
-    })
+process.argv.length > 3
+	?  person.save().then(result => {
+		//print a message to the console
+		console.log(`add ${name} number ${number} to phonebook`)
+		mongoose.connection.close() // close the connection to the db
+	})
+	: Person.find({}).then((result) => {
+		console.log('Phonebook : ')
+		result.forEach( p => {
+			console.log(`${p.name} ${p.number}`)
+		})
+		mongoose.connection.close()
+	})
